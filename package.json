@@ -1,0 +1,17 @@
+{
+  "name": "proxyservernodejs",
+  "version": "1.0.0",
+  "description": "Redirects all requests to primary server. Secondary server handles if fails.",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "url": "^0.11.0"
+  }
+}
