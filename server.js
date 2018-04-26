@@ -1,13 +1,19 @@
 var url = require('url');
 var http = require('http');
 var axios = require('axios');
+var express = require('express');
+var cors = require('cors');
 
-http.createServer(function(req, res){
+var app = express();
+
+app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+
+var server = http.createServer(function(req, res){
   var reqUrl = req.url.substr(1);
-  axios.get('http://localhost:1111/healthcheck').then(function(data){
+  axios.get('http://localhost:1112/healthcheck').then(function(data){
     if(data.data.uptime){
       console.log("in 1 na");
-      reqUrl = "http://localhost:1111/"+reqUrl;
+      reqUrl = "http://localhost:1112/"+reqUrl;
       req.pause();
       var options = url.parse(reqUrl);
       options.headers = req.headers;
@@ -29,7 +35,7 @@ http.createServer(function(req, res){
     }
     else{
       console.log("in 2 na");
-      reqUrl = "http://localhost:1112/"+reqUrl;
+      reqUrl = "http://localhost:1113/"+reqUrl;
       req.pause();
       var options = url.parse(reqUrl);
       options.headers = req.headers;
@@ -51,7 +57,7 @@ http.createServer(function(req, res){
     }
   }).catch(function(err){
     console.log("in 3 na");
-    reqUrl = "http://localhost:1112/"+reqUrl;
+    reqUrl = "http://localhost:1113/"+reqUrl;
     req.pause();
     var options = url.parse(reqUrl);
     options.headers = req.headers;
@@ -71,6 +77,6 @@ http.createServer(function(req, res){
     req.pipe(connector, {end:true});
     req.resume();
   });
-}).listen(1110);
+}).listen(1111);
 
-console.log("The server is running at port 1110");
+console.log("The server is running at port 1111");
