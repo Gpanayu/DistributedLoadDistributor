@@ -12,7 +12,7 @@ var server = http.createServer(function(req, res){
   var reqUrl = req.url.substr(1);
   axios.get('http://localhost:1112/healthcheck').then(function(data){
     if(data.data.uptime){
-      console.log("in 1 na");
+      console.log("Calling Primary Server");
       reqUrl = "http://localhost:1112/"+reqUrl;
       req.pause();
       var options = url.parse(reqUrl);
@@ -34,7 +34,7 @@ var server = http.createServer(function(req, res){
       req.resume();
     }
     else{
-      console.log("in 2 na");
+      console.log("Calling Secondary Server");
       reqUrl = "http://localhost:1113/"+reqUrl;
       req.pause();
       var options = url.parse(reqUrl);
@@ -56,7 +56,7 @@ var server = http.createServer(function(req, res){
       req.resume();
     }
   }).catch(function(err){
-    console.log("in 3 na");
+    console.log("Calling Secondary Server");
     reqUrl = "http://localhost:1113/"+reqUrl;
     req.pause();
     var options = url.parse(reqUrl);
